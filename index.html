@@ -9,7 +9,7 @@
 <title>Para Vicky ♡</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
-*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; touch-action: manipulation; }
 
 :root {
   --coral:  #ff6b9d;
@@ -27,7 +27,7 @@
 html { scroll-behavior: smooth; }
 body {
   font-family: 'Inter', sans-serif;
-  background: #fdf0f7;
+  background: linear-gradient(160deg, #fef3e2 0%, #ffe8f0 55%, #ece8ff 100%);
   color: var(--text);
   overflow-x: hidden;
   cursor: default;
@@ -137,13 +137,14 @@ section { position: relative; z-index: 1; }
    HERO
 ══════════════════════════════ */
 .hero {
-  min-height: 100dvh;
+  min-height: 100svh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   text-align: center;
   padding: 60px 24px 80px;
+  padding-top: max(60px, env(safe-area-inset-top));
   overflow: hidden;
 }
 
@@ -395,25 +396,53 @@ section { position: relative; z-index: 1; }
   font-size: 14px;
 }
 
+/* Video slide */
+.video-slide video {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.video-play-btn {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 56px; height: 56px;
+  background: rgba(255,255,255,0.25);
+  backdrop-filter: blur(6px);
+  border-radius: 50%;
+  color: white;
+  font-size: 20px;
+  display: flex; align-items: center; justify-content: center;
+  transition: opacity .3s ease, transform .3s ease;
+  pointer-events: none;
+}
+.video-slide.playing .video-play-btn { opacity: 0; transform: translate(-50%, -50%) scale(0.8); }
+
 /* Carousel dots */
 .carousel-dots {
   display: flex;
   justify-content: center;
-  gap: 8px;
-  margin-top: 20px;
-  padding: 0 24px;
+  align-items: center;
+  gap: 10px;
+  margin-top: 24px;
+  padding: 8px 24px;
 }
 .dot {
-  width: 8px; height: 8px;
+  width: 10px; height: 10px;
   border-radius: 50%;
   background: rgba(255,107,157,0.25);
   transition: all .3s ease;
   cursor: pointer;
+  /* bigger tap area without visible change */
+  padding: 6px;
+  box-sizing: content-box;
+  background-clip: content-box;
 }
 .dot.active {
   background: var(--coral);
-  width: 24px;
-  border-radius: 4px;
+  background-clip: content-box;
+  width: 26px;
+  border-radius: 5px;
 }
 
 /* ══════════════════════════════
@@ -551,26 +580,40 @@ section { position: relative; z-index: 1; }
    IPHONE (≤ 430px)
 ══════════════════════════════ */
 @media (max-width: 430px) {
-  .hero { padding: 48px 20px 80px; }
-  .hero-photo { width: 62vw; height: 62vw; }
+  .hero {
+    padding: max(52px, env(safe-area-inset-top)) 20px 72px;
+    min-height: 100svh;
+    gap: 4px;
+  }
+  .hero-photo-wrap { margin-bottom: 24px; }
+  .hero-photo { width: 68vw; height: 68vw; }
+  .hero-name { font-size: clamp(62px, 18vw, 90px); }
+  .hero-sub { margin-top: 8px; }
 
-  .countdown-section { padding: 60px 16px; }
+  .countdown-section { padding: 56px 16px; }
   .countdown-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 10px;
-    max-width: 280px;
-    margin: 0 auto 28px;
+    max-width: 300px;
+    margin: 0 auto 24px;
   }
-  .cd-box { padding: 18px 10px; min-width: unset; }
-  .cd-num { font-size: 32px; }
+  .cd-box { padding: 20px 10px; min-width: unset; }
+  .cd-num { font-size: 36px; }
+  .cd-lbl { font-size: 9px; }
+  .section-h { font-size: clamp(22px, 6vw, 32px); }
 
-  .gallery-section { padding: 60px 0; }
-  .photo-slide { flex: 0 0 82vw; }
+  .gallery-section { padding: 56px 0; }
+  .photo-slide { flex: 0 0 84vw; }
+  .carousel-track { padding: 12px 16px 20px; gap: 12px; }
 
-  .message-section { padding: 60px 16px max(60px, env(safe-area-inset-bottom)); }
-  .msg-card { padding: 40px 22px 32px; border-radius: 24px; }
-  .msg-text { font-size: 18px; }
+  .message-section { padding: 56px 16px max(60px, calc(40px + env(safe-area-inset-bottom))); }
+  .msg-card { padding: 44px 24px 36px; border-radius: 24px; }
+  .msg-text { font-size: 18px; line-height: 1.75; }
+  .msg-card::before { top: -20px; width: 40px; height: 40px; font-size: 18px; line-height: 40px; }
+
+  .scroll-cue { font-size: 9px; }
+  .date-badge { font-size: 12px; padding: 10px 18px; }
 }
 
 /* ══════════════════════════════
@@ -583,11 +626,35 @@ section { position: relative; z-index: 1; }
   .msg-card { padding: 60px 60px 52px; }
 }
 
+/* ══════════════════════════════
+   PIXEL CAT
+══════════════════════════════ */
+.pixel-cat {
+  position: fixed;
+  bottom: max(16px, env(safe-area-inset-bottom));
+  right: 14px;
+  z-index: 10;
+  pointer-events: none;
+  image-rendering: pixelated;
+  animation: catFloat 3.2s ease-in-out infinite;
+  opacity: 0.9;
+}
+@keyframes catFloat {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(-7px); }
+}
+
 /* Touch: no hover */
 @media (hover: none) {
   .photo-slide:hover img { transform: none; }
   .cd-box:hover { transform: none; }
   .slide-caption { display: block; }
+  /* Reduce expensive blur on mobile GPU */
+  .blob { filter: blur(40px); }
+  .msg-card { backdrop-filter: blur(8px); }
+  #lightbox { backdrop-filter: blur(8px); }
+  .cd-box { backdrop-filter: none; }
+  .date-badge { backdrop-filter: none; }
 }
 </style>
 </head>
@@ -620,9 +687,11 @@ section { position: relative; z-index: 1; }
     <img src="foto4.jpg" class="hero-photo" alt="Vicky"
          onerror="this.style.background='linear-gradient(135deg,#ff9ec4,#c77dff)';this.removeAttribute('src')">
   </div>
-  <div class="hero-tag">♡ hola amorchito</div>
-  <h1 class="hero-name">Vicky</h1>
-  <p class="hero-sub">aka mi cabezota favorita</p>
+  <div class="hero-text">
+    <div class="hero-tag">♡ hola amorchito</div>
+    <h1 class="hero-name">Vicky</h1>
+    <p class="hero-sub">aka mi cabezota favorita</p>
+  </div>
   <div class="scroll-cue">
     <div class="arrow">↓</div>
     <span>baja</span>
@@ -686,17 +755,50 @@ section { position: relative; z-index: 1; }
         <img src="foto5.jpg" alt="Mirador">
         <div class="slide-caption">con esas vistas 🌊</div>
       </div>
-      <div class="photo-slide" onclick="openLightbox('foto6.jpg')">
-        <img src="foto6.jpg" alt="Tontos">
-        <div class="slide-caption">dos tontos 😜</div>
-      </div>
-      <div class="photo-slide" onclick="openLightbox('foto7.jpg')">
+<div class="photo-slide" onclick="openLightbox('foto7.jpg')">
         <img src="foto7.jpg" alt="Casa">
         <div class="slide-caption">tardes en casa ⚽</div>
       </div>
       <div class="photo-slide" onclick="openLightbox('foto2.jpg')">
         <img src="foto2.jpg" alt="Viaje solo">
         <div class="slide-caption">tu cabezón de aventuras 🌊</div>
+      </div>
+      <div class="photo-slide" onclick="openLightbox('foto8.jpeg')">
+        <img src="foto8.jpeg" alt="Atardecer">
+        <div class="slide-caption">ese beso al atardecer 🌅</div>
+      </div>
+      <div class="photo-slide" onclick="openLightbox('foto9.jpeg')">
+        <img src="foto9.jpeg" alt="Montaña atardecer">
+        <div class="slide-caption">juntos mirando el horizonte 🌄</div>
+      </div>
+      <div class="photo-slide" onclick="openLightbox('foto10.jpeg')">
+        <img src="foto10.jpeg" alt="Nieve tormenta">
+        <div class="slide-caption">la tormenta más bonita ❄️</div>
+      </div>
+      <div class="photo-slide" onclick="openLightbox('foto11.jpeg')">
+        <img src="foto11.jpeg" alt="Atardecer bosque">
+        <div class="slide-caption">ese atardecer contigo 🌸</div>
+      </div>
+      <div class="photo-slide" onclick="openLightbox('foto12.jpeg')">
+        <img src="foto12.jpeg" alt="Beso">
+        <div class="slide-caption">el mejor sitio del mundo 🥰</div>
+      </div>
+      <div class="photo-slide" onclick="openLightbox('foto13.jpeg')">
+        <img src="foto13.jpeg" alt="Parches">
+        <div class="slide-caption">parches de nariz incluidos 😂</div>
+      </div>
+      <div class="photo-slide" onclick="openLightbox('foto14.jpeg')">
+        <img src="foto14.jpeg" alt="Flores">
+        <div class="slide-caption">te mereces todas las flores 🌻</div>
+      </div>
+      <div class="photo-slide" onclick="openLightbox('foto15.jpeg')">
+        <img src="foto15.jpeg" alt="Sofá">
+        <div class="slide-caption">sin que te lo pida 💕</div>
+      </div>
+      <div class="photo-slide video-slide" onclick="toggleVideo(this)">
+        <video src="video1.mp4" loop playsinline preload="metadata"></video>
+        <div class="slide-caption">y muchos momentos más 🎬</div>
+        <div class="video-play-btn">▶</div>
       </div>
     </div>
   </div>
@@ -719,6 +821,153 @@ section { position: relative; z-index: 1; }
     <div class="tap-hint">toca para mandar amor</div>
   </div>
 </section>
+
+<!-- PIXEL CAT -->
+<svg class="pixel-cat" width="70" height="105" xmlns="http://www.w3.org/2000/svg" shape-rendering="crispEdges">
+  <!-- ears -->
+  <rect x="0"  y="0"  width="7" height="7" fill="#1d1d1d"/>
+  <rect x="7"  y="0"  width="7" height="7" fill="#1d1d1d"/>
+  <rect x="56" y="0"  width="7" height="7" fill="#1d1d1d"/>
+  <rect x="63" y="0"  width="7" height="7" fill="#1d1d1d"/>
+  <!-- ear sides -->
+  <rect x="0"  y="7"  width="7" height="7" fill="#1d1d1d"/>
+  <rect x="7"  y="7"  width="7" height="7" fill="#f0ede8"/>
+  <rect x="14" y="7"  width="7" height="7" fill="#1d1d1d"/>
+  <rect x="49" y="7"  width="7" height="7" fill="#1d1d1d"/>
+  <rect x="56" y="7"  width="7" height="7" fill="#f0ede8"/>
+  <rect x="63" y="7"  width="7" height="7" fill="#1d1d1d"/>
+  <!-- head top -->
+  <rect x="0"  y="14" width="7" height="7" fill="#1d1d1d"/>
+  <rect x="7"  y="14" width="7" height="7" fill="#f0ede8"/>
+  <rect x="14" y="14" width="7" height="7" fill="#f0ede8"/>
+  <rect x="21" y="14" width="7" height="7" fill="#1d1d1d"/>
+  <rect x="28" y="14" width="7" height="7" fill="#1d1d1d"/>
+  <rect x="35" y="14" width="7" height="7" fill="#1d1d1d"/>
+  <rect x="42" y="14" width="7" height="7" fill="#1d1d1d"/>
+  <rect x="49" y="14" width="7" height="7" fill="#f0ede8"/>
+  <rect x="56" y="14" width="7" height="7" fill="#f0ede8"/>
+  <rect x="63" y="14" width="7" height="7" fill="#1d1d1d"/>
+  <!-- face -->
+  <rect x="0"  y="21" width="7" height="7" fill="#1d1d1d"/>
+  <rect x="7"  y="21" width="7" height="7" fill="#e8963c"/>
+  <rect x="14" y="21" width="7" height="7" fill="#f0ede8"/>
+  <rect x="21" y="21" width="7" height="7" fill="#f0ede8"/>
+  <rect x="28" y="21" width="7" height="7" fill="#f0ede8"/>
+  <rect x="35" y="21" width="7" height="7" fill="#f0ede8"/>
+  <rect x="42" y="21" width="7" height="7" fill="#f0ede8"/>
+  <rect x="49" y="21" width="7" height="7" fill="#f0ede8"/>
+  <rect x="56" y="21" width="7" height="7" fill="#f0ede8"/>
+  <rect x="63" y="21" width="7" height="7" fill="#1d1d1d"/>
+  <!-- eyes -->
+  <rect x="0"  y="28" width="7" height="7" fill="#1d1d1d"/>
+  <rect x="7"  y="28" width="7" height="7" fill="#e8963c"/>
+  <rect x="14" y="28" width="7" height="7" fill="#1d1d1d"/>
+  <rect x="21" y="28" width="7" height="7" fill="#f0ede8"/>
+  <rect x="28" y="28" width="7" height="7" fill="#f0ede8"/>
+  <rect x="35" y="28" width="7" height="7" fill="#f0ede8"/>
+  <rect x="42" y="28" width="7" height="7" fill="#1d1d1d"/>
+  <rect x="49" y="28" width="7" height="7" fill="#f0ede8"/>
+  <rect x="56" y="28" width="7" height="7" fill="#f0ede8"/>
+  <rect x="63" y="28" width="7" height="7" fill="#1d1d1d"/>
+  <!-- nose -->
+  <rect x="0"  y="35" width="7" height="7" fill="#1d1d1d"/>
+  <rect x="7"  y="35" width="7" height="7" fill="#e8963c"/>
+  <rect x="14" y="35" width="7" height="7" fill="#f0ede8"/>
+  <rect x="21" y="35" width="7" height="7" fill="#f0ede8"/>
+  <rect x="28" y="35" width="7" height="7" fill="#e8a8a0"/>
+  <rect x="35" y="35" width="7" height="7" fill="#f0ede8"/>
+  <rect x="42" y="35" width="7" height="7" fill="#f0ede8"/>
+  <rect x="49" y="35" width="7" height="7" fill="#f0ede8"/>
+  <rect x="56" y="35" width="7" height="7" fill="#f0ede8"/>
+  <rect x="63" y="35" width="7" height="7" fill="#1d1d1d"/>
+  <!-- chin -->
+  <rect x="0"  y="42" width="7" height="7" fill="#1d1d1d"/>
+  <rect x="7"  y="42" width="7" height="7" fill="#f0ede8"/>
+  <rect x="14" y="42" width="7" height="7" fill="#f0ede8"/>
+  <rect x="21" y="42" width="7" height="7" fill="#f0ede8"/>
+  <rect x="28" y="42" width="7" height="7" fill="#f0ede8"/>
+  <rect x="35" y="42" width="7" height="7" fill="#f0ede8"/>
+  <rect x="42" y="42" width="7" height="7" fill="#f0ede8"/>
+  <rect x="49" y="42" width="7" height="7" fill="#f0ede8"/>
+  <rect x="56" y="42" width="7" height="7" fill="#f0ede8"/>
+  <rect x="63" y="42" width="7" height="7" fill="#1d1d1d"/>
+  <!-- chin bottom -->
+  <rect x="7"  y="49" width="7" height="7" fill="#1d1d1d"/>
+  <rect x="14" y="49" width="7" height="7" fill="#f0ede8"/>
+  <rect x="21" y="49" width="7" height="7" fill="#f0ede8"/>
+  <rect x="28" y="49" width="7" height="7" fill="#f0ede8"/>
+  <rect x="35" y="49" width="7" height="7" fill="#f0ede8"/>
+  <rect x="42" y="49" width="7" height="7" fill="#f0ede8"/>
+  <rect x="49" y="49" width="7" height="7" fill="#f0ede8"/>
+  <rect x="56" y="49" width="7" height="7" fill="#1d1d1d"/>
+  <!-- neck -->
+  <rect x="7"  y="56" width="7" height="7" fill="#1d1d1d"/>
+  <rect x="14" y="56" width="7" height="7" fill="#1d1d1d"/>
+  <rect x="21" y="56" width="7" height="7" fill="#f0ede8"/>
+  <rect x="28" y="56" width="7" height="7" fill="#f0ede8"/>
+  <rect x="35" y="56" width="7" height="7" fill="#f0ede8"/>
+  <rect x="42" y="56" width="7" height="7" fill="#f0ede8"/>
+  <rect x="49" y="56" width="7" height="7" fill="#1d1d1d"/>
+  <rect x="56" y="56" width="7" height="7" fill="#1d1d1d"/>
+  <!-- body top: orange patches left -->
+  <rect x="0"  y="63" width="7" height="7" fill="#1d1d1d"/>
+  <rect x="7"  y="63" width="7" height="7" fill="#f0ede8"/>
+  <rect x="14" y="63" width="7" height="7" fill="#d4722a"/>
+  <rect x="21" y="63" width="7" height="7" fill="#d4722a"/>
+  <rect x="28" y="63" width="7" height="7" fill="#f0ede8"/>
+  <rect x="35" y="63" width="7" height="7" fill="#f0ede8"/>
+  <rect x="42" y="63" width="7" height="7" fill="#f0ede8"/>
+  <rect x="49" y="63" width="7" height="7" fill="#f0ede8"/>
+  <rect x="56" y="63" width="7" height="7" fill="#f0ede8"/>
+  <rect x="63" y="63" width="7" height="7" fill="#1d1d1d"/>
+  <!-- body: orange left + black patch right -->
+  <rect x="0"  y="70" width="7" height="7" fill="#1d1d1d"/>
+  <rect x="7"  y="70" width="7" height="7" fill="#f0ede8"/>
+  <rect x="14" y="70" width="7" height="7" fill="#d4722a"/>
+  <rect x="21" y="70" width="7" height="7" fill="#d4722a"/>
+  <rect x="28" y="70" width="7" height="7" fill="#f0ede8"/>
+  <rect x="35" y="70" width="7" height="7" fill="#f0ede8"/>
+  <rect x="42" y="70" width="7" height="7" fill="#1d1d1d"/>
+  <rect x="49" y="70" width="7" height="7" fill="#1d1d1d"/>
+  <rect x="56" y="70" width="7" height="7" fill="#f0ede8"/>
+  <rect x="63" y="70" width="7" height="7" fill="#1d1d1d"/>
+  <!-- body: black patch right continues -->
+  <rect x="0"  y="77" width="7" height="7" fill="#1d1d1d"/>
+  <rect x="7"  y="77" width="7" height="7" fill="#f0ede8"/>
+  <rect x="14" y="77" width="7" height="7" fill="#f0ede8"/>
+  <rect x="21" y="77" width="7" height="7" fill="#f0ede8"/>
+  <rect x="28" y="77" width="7" height="7" fill="#f0ede8"/>
+  <rect x="35" y="77" width="7" height="7" fill="#f0ede8"/>
+  <rect x="42" y="77" width="7" height="7" fill="#1d1d1d"/>
+  <rect x="49" y="77" width="7" height="7" fill="#1d1d1d"/>
+  <rect x="56" y="77" width="7" height="7" fill="#f0ede8"/>
+  <rect x="63" y="77" width="7" height="7" fill="#1d1d1d"/>
+  <!-- body bottom -->
+  <rect x="0"  y="84" width="7" height="7" fill="#1d1d1d"/>
+  <rect x="7"  y="84" width="7" height="7" fill="#f0ede8"/>
+  <rect x="14" y="84" width="7" height="7" fill="#f0ede8"/>
+  <rect x="21" y="84" width="7" height="7" fill="#f0ede8"/>
+  <rect x="28" y="84" width="7" height="7" fill="#f0ede8"/>
+  <rect x="35" y="84" width="7" height="7" fill="#f0ede8"/>
+  <rect x="42" y="84" width="7" height="7" fill="#f0ede8"/>
+  <rect x="49" y="84" width="7" height="7" fill="#f0ede8"/>
+  <rect x="56" y="84" width="7" height="7" fill="#f0ede8"/>
+  <rect x="63" y="84" width="7" height="7" fill="#1d1d1d"/>
+  <!-- paws -->
+  <rect x="7"  y="91" width="7" height="7" fill="#1d1d1d"/>
+  <rect x="14" y="91" width="7" height="7" fill="#f0ede8"/>
+  <rect x="21" y="91" width="7" height="7" fill="#f0ede8"/>
+  <rect x="28" y="91" width="7" height="7" fill="#1d1d1d"/>
+  <rect x="35" y="91" width="7" height="7" fill="#1d1d1d"/>
+  <rect x="42" y="91" width="7" height="7" fill="#f0ede8"/>
+  <rect x="49" y="91" width="7" height="7" fill="#f0ede8"/>
+  <rect x="56" y="91" width="7" height="7" fill="#1d1d1d"/>
+  <!-- paw bottoms -->
+  <rect x="14" y="98" width="7" height="7" fill="#1d1d1d"/>
+  <rect x="21" y="98" width="7" height="7" fill="#1d1d1d"/>
+  <rect x="42" y="98" width="7" height="7" fill="#1d1d1d"/>
+  <rect x="49" y="98" width="7" height="7" fill="#1d1d1d"/>
+</svg>
 
 <script>
 // ══ REVEAL ══
@@ -811,11 +1060,24 @@ function closeLightbox() {
 }
 document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
 
+// ══ VIDEO TOGGLE ══
+function toggleVideo(slide) {
+  const vid = slide.querySelector('video');
+  if (vid.paused) {
+    vid.play();
+    slide.classList.add('playing');
+  } else {
+    vid.pause();
+    slide.classList.remove('playing');
+  }
+}
+
 // ══ SCROLL REVEAL ══
 const io = new IntersectionObserver(entries => {
   entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
-}, { threshold: 0.1 });
+}, { threshold: 0.05, rootMargin: '0px 0px -40px 0px' });
 document.querySelectorAll('.reveal-section').forEach(el => io.observe(el));
+
 </script>
 </body>
 </html>
