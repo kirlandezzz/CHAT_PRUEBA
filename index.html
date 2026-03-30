@@ -663,8 +663,9 @@ function connectGun() {
   if (gun) return;
   gun = Gun({
     peers: [
-      'https://gun-manhattan.herokuapp.com/gun',
-      'https://gun-us.herokuapp.com/gun'
+      'https://gun-relay.herokuapp.com/gun',
+      'wss://gun-us.herokuapp.com/gun',
+      'https://peer.wallie.io/gun'
     ],
     localStorage: false
   });
@@ -832,6 +833,11 @@ async function fire() {
     text: text,
     time: Date.now()
   }), cryptoKey);
+
+  // Render own message immediately (don't wait for Gun callback)
+  const msgKey = payload.substring(0, 40);
+  seenMsgs.add(msgKey);
+  renderBubble({ type: 'msg', sender: myAlias, text: text, time: Date.now() });
 
   roomRef.get('stream').set({
     d: payload,
