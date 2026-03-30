@@ -397,6 +397,10 @@ section { position: relative; z-index: 1; }
 }
 
 /* Video slide */
+.video-slide {
+  -webkit-touch-callout: none;
+  user-select: none;
+}
 .video-slide video {
   width: 100%; height: 100%;
   object-fit: cover;
@@ -417,6 +421,27 @@ section { position: relative; z-index: 1; }
   pointer-events: none;
 }
 .video-slide.playing .video-play-btn { opacity: 0; transform: translate(-50%, -50%) scale(0.8); }
+
+/* Video lightbox (hold-to-preview) */
+#video-lb {
+  position: fixed;
+  inset: 0;
+  z-index: 850;
+  background: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .18s ease;
+}
+#video-lb.open { opacity: 1; pointer-events: all; }
+#video-lb video {
+  width: 100%;
+  height: 100%;
+  max-height: 100dvh;
+  object-fit: contain;
+}
 
 /* Carousel dots */
 .carousel-dots {
@@ -795,7 +820,7 @@ section { position: relative; z-index: 1; }
         <img src="foto15.jpeg" alt="Sofá">
         <div class="slide-caption">sin que te lo pida 💕</div>
       </div>
-      <div class="photo-slide video-slide" onclick="toggleVideo(this)">
+      <div class="photo-slide video-slide" id="videoSlide">
         <video src="video1.mp4" loop playsinline preload="metadata"></video>
         <div class="slide-caption">y muchos momentos más 🎬</div>
         <div class="video-play-btn">▶</div>
@@ -821,6 +846,11 @@ section { position: relative; z-index: 1; }
     <div class="tap-hint">toca para mandar amor</div>
   </div>
 </section>
+
+<!-- VIDEO LIGHTBOX -->
+<div id="video-lb">
+  <video id="video-lb-el" playsinline></video>
+</div>
 
 <!-- PIXEL CAT -->
 <svg class="pixel-cat" width="70" height="105" xmlns="http://www.w3.org/2000/svg" shape-rendering="crispEdges">
@@ -1060,17 +1090,63 @@ function closeLightbox() {
 }
 document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
 
-// ══ VIDEO TOGGLE ══
-function toggleVideo(slide) {
-  const vid = slide.querySelector('video');
-  if (vid.paused) {
-    vid.play();
-    slide.classList.add('playing');
-  } else {
-    vid.pause();
-    slide.classList.remove('playing');
+// ══ VIDEO: TAP = play/pause · HOLD = pantalla completa ══
+(function () {
+  const slide   = document.getElementById('videoSlide');
+  const inlineV = slide.querySelector('video');
+  const lb      = document.getElementById('video-lb');
+  const lbV     = document.getElementById('video-lb-el');
+
+  let pressTimer = null;
+  let didLongPress = false;
+
+  function openVideoLb() {
+    didLongPress = true;
+    lbV.src = inlineV.src;
+    lbV.currentTime = inlineV.currentTime;
+    lb.classList.add('open');
+    lbV.play().catch(() => {});
   }
-}
+
+  function closeVideoLb() {
+    lb.classList.remove('open');
+    lbV.pause();
+    lbV.removeAttribute('src');
+    lbV.load();
+  }
+
+  slide.addEventListener('pointerdown', () => {
+    didLongPress = false;
+    pressTimer = setTimeout(openVideoLb, 380);
+  });
+
+  slide.addEventListener('pointerup', () => {
+    clearTimeout(pressTimer);
+    if (didLongPress) {
+      closeVideoLb();
+    } else {
+      // short tap → play/pause
+      if (inlineV.paused) {
+        inlineV.play().catch(() => {});
+        slide.classList.add('playing');
+      } else {
+        inlineV.pause();
+        slide.classList.remove('playing');
+      }
+    }
+    didLongPress = false;
+  });
+
+  slide.addEventListener('pointercancel', () => {
+    clearTimeout(pressTimer);
+    if (didLongPress) closeVideoLb();
+    didLongPress = false;
+  });
+
+  // evitar menú contextual en iOS al hacer long press
+  slide.addEventListener('contextmenu', e => e.preventDefault());
+  lb.addEventListener('contextmenu', e => e.preventDefault());
+}());
 
 // ══ SCROLL REVEAL ══
 const io = new IntersectionObserver(entries => {
