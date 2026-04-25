@@ -636,6 +636,7 @@ a:hover { color: var(--c-amarillo-aceite); }
     grid-template-columns: 2fr 1fr;
     gap: 1rem;
     margin: 1.75rem 0 2rem;
+    align-items: center;
 }
 .equipo__foto {
     margin: 0;
