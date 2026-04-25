@@ -1,0 +1,27 @@
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Editor / IDE
+.vscode/*
+!.vscode/settings.json
+.idea/
+*.swp
+*~
+
+# OS
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Node / dependencias (por si en el futuro se añade)
+node_modules/
+
+# Builds y temporales
+dist/
+build/
+*.log
+
+# Script auxiliar de un solo uso (no es parte del proyecto)
+deploy-prep.sh
