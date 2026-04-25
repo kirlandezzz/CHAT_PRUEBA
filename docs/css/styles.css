@@ -106,15 +106,15 @@ a:hover { color: var(--c-amarillo-aceite); }
     align-items: center;
     justify-content: space-between;
     gap: 0.75rem;
-    padding: 0.6rem clamp(1rem, 3vw, 1.75rem);
-    padding-top: max(0.6rem, env(safe-area-inset-top));
-    padding-left: max(clamp(1rem, 3vw, 1.75rem), env(safe-area-inset-left));
-    padding-right: max(clamp(1rem, 3vw, 1.75rem), env(safe-area-inset-right));
-    background: rgba(251, 248, 241, 0.92);
+    padding: 0.7rem clamp(1rem, 3vw, 1.75rem);
+    padding-top: calc(0.7rem + env(safe-area-inset-top, 0px));
+    padding-left: calc(clamp(1rem, 3vw, 1.75rem) + env(safe-area-inset-left, 0px));
+    padding-right: calc(clamp(1rem, 3vw, 1.75rem) + env(safe-area-inset-right, 0px));
+    background: rgba(251, 248, 241, 0.94);
     backdrop-filter: saturate(160%) blur(12px);
     -webkit-backdrop-filter: saturate(160%) blur(12px);
     border-bottom: 1px solid rgba(0, 0, 0, 0.06);
-    min-height: 56px;
+    min-height: calc(56px + env(safe-area-inset-top, 0px));
 }
 .nav__brand {
     display: flex;
@@ -748,14 +748,14 @@ a:hover { color: var(--c-amarillo-aceite); }
 /* -------------------- Responsive (Tablet) -------------------- */
 @media (max-width: 900px) {
     .nav {
-        padding: 0.55rem 1rem;
-        padding-top: max(0.55rem, env(safe-area-inset-top));
-        padding-left: max(1rem, env(safe-area-inset-left));
-        padding-right: max(1rem, env(safe-area-inset-right));
+        padding: 0.65rem 1rem;
+        padding-top: calc(0.65rem + env(safe-area-inset-top, 0px));
+        padding-left: calc(1rem + env(safe-area-inset-left, 0px));
+        padding-right: calc(1rem + env(safe-area-inset-right, 0px));
     }
     .nav__menu {
         position: fixed;
-        top: calc(56px + env(safe-area-inset-top));
+        top: calc(56px + env(safe-area-inset-top, 0px));
         left: 0; right: 0;
         background: var(--c-papel);
         flex-direction: column;
