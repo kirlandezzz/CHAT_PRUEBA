@@ -246,7 +246,8 @@ a:hover { color: var(--c-amarillo-aceite); }
     flex-wrap: wrap;
     gap: 0.45rem;
 }
-.hero__tags span {
+.hero__tags span,
+.hero__tags a {
     font-size: 0.74rem;
     font-weight: 500;
     padding: 0.32rem 0.7rem;
@@ -255,6 +256,16 @@ a:hover { color: var(--c-amarillo-aceite); }
     border-radius: 999px;
     backdrop-filter: blur(6px);
     -webkit-backdrop-filter: blur(6px);
+    color: #fff;
+    text-decoration: none;
+    transition: background var(--transition), border-color var(--transition), color var(--transition);
+}
+.hero__tags a:hover,
+.hero__tags a:focus-visible {
+    background: rgba(232, 165, 60, 0.22);
+    border-color: var(--c-amarillo-aceite);
+    color: var(--c-amarillo-luz);
+    outline: none;
 }
 .hero__scroll {
     position: absolute;
@@ -811,7 +822,8 @@ a:hover { color: var(--c-amarillo-aceite); }
     .hero__logo { width: 64px; height: 64px; }
     .hero__title { font-size: clamp(1.7rem, 7.5vw, 2.4rem); }
     .hero__lead { font-size: 0.98rem; }
-    .hero__tags span { font-size: 0.72rem; padding: 0.28rem 0.6rem; }
+    .hero__tags span,
+    .hero__tags a { font-size: 0.72rem; padding: 0.28rem 0.6rem; }
 
     .section { padding: 2.2rem 0; }
     .title { font-size: clamp(1.55rem, 6.5vw, 2rem); }
