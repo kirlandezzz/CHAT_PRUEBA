@@ -338,8 +338,10 @@ a:hover { color: var(--c-amarillo-aceite); }
     gap: 0.6rem;
 }
 .ig__post {
+    display: block;
     position: relative;
     aspect-ratio: 1 / 1;
+    width: 100%;
     overflow: hidden;
     border-radius: 8px;
     text-decoration: none;
