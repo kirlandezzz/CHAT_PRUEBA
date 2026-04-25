@@ -1,0 +1,52 @@
+IMÁGENES PARA LA WEB LIMPILLA
+==============================
+
+Guarda tus imágenes en la carpeta web/img/ con EXACTAMENTE estos nombres:
+
+1. logo-limpilla.png   → Tu logo oficial de Limpilla
+                         (MEJOR con fondo transparente .png)
+                         → Si no tienes versión transparente, hay un
+                           logo-limpilla.svg de respaldo que ya está incluido
+
+2. tunera.jpg          → Foto de la tunera / cactus afectado
+
+3. equipo-1.jpg        → Foto del equipo completo (6 personas)
+
+4. equipo-2.jpg        → Foto de las 2 estudiantes con el cartel
+
+
+FOTOS DISPONIBLES EN materiales/fotos/
+=======================================
+Hay 5 fotos (foto-1.jpg … foto-5.jpg) importadas desde WhatsApp.
+Revísalas y renómbralas/cópialas a web/img/ con los nombres
+de arriba si alguna corresponde a tunera o al equipo.
+
+
+CÓMO HACER EL LOGO TRANSPARENTE
+================================
+Si tu logo tiene fondo blanco y quieres quitarlo:
+
+Opción A — Photoshop / GIMP:
+  1. Abre la imagen
+  2. Selecciona el fondo blanco con "varita mágica"
+  3. Borrar (Suprimir)
+  4. Guardar como PNG (con transparencia)
+
+Opción B — Online (gratis):
+  - https://www.remove.bg
+  - https://www.photopea.com (Photoshop gratis en web)
+
+Opción C — Usa el logo-limpilla.svg que ya viene
+  (es vectorial y transparente por defecto)
+
+
+FORMATOS ACEPTADOS
+==================
+- .png   (recomendado para logo — permite transparencia)
+- .jpg / .jpeg   (para fotos)
+- .svg   (vectorial, ideal para logos)
+
+Tamaño recomendado: máximo 2 MB por imagen.
+
+Si alguna imagen falta, la web sigue funcionando mostrando
+un bloque verde en su lugar (no se rompe).

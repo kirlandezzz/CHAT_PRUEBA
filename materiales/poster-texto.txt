@@ -1,0 +1,84 @@
+                 USO DE ACEITES ESENCIALES DE FLORA CANARIA COMO BIOINSECTICIDAS PARA EL
+                                    CONTROL DE DACTYLOPIUS OPUNTIAE
+                                    Y. Navarro Dos Santosᵃ, V. Molinero Naranjoᵃ, A. González Cabreraᵇ˒ᶜ˒ᵈ, A. Baz Figueroaᵇ˒ᶜ˒ᵈ, D. Díaz Díazᶜ˒ᵈ
+           ᵃ2º Grado en Farmacia, ᵇPrograma de doctorado en química e ingeniería química, ᶜAFM-NANO, Instituto Universitario de Bio-Orgánica Antonio González (IUBO-
+          AG), Universidad de La Laguna, Avda. Astrofísico Francisco Sánchez 2, La Laguna, 38206 España, ᵈDepartamento de Química Orgánica, Universidad de La Laguna,
+                                                           Avda. Astrofísico Francisco Sánchez 3, La Laguna 38206, España.
+
+
+                                                                                 INTRODUCCIÓN
+
+En Canarias, la tunera (Opuntia ficus-indica) está siendo seriamente afectada por la acción de la cochinilla silvestre (Dactylopius opuntiae), cuyo
+control se realiza actualmente mediante la poda total de la planta. Ante esta situación, surge la necesidad de explorar estrategias alternativas
+más sostenibles, como el diseño de biopesticidas de bajo impacto ambiental basados en aceites esenciales de especies vegetales autóctonas
+con potencial insecticida, entre las que destacan el laurel canario (Laurus novocanariensis), la ruda (Ruta pinnata) y el ajenjo canario (Artemisia
+thuscula) (Fig. 1).
+ a)                                      b)                                    c)                                  d)                                 e)
+
+
+
+
+ Figura 1.- a) Laurus novocanariensis, b) Ruta pinnata, c) Artemisia thuscula, d) Tunera infestada, e) Dactylopius opuntiae
+
+
+                                                                                    METODOLOGÍA
+
+                                                                                                       Jabón potásico:
+ El potencial insecticida de los aceites se debe a la presencia de
+ monoterpenos como el 1,8-cineol y el alcanfor y cetonas alifáticas como 2-                                                                                        Aceite
+ undecanona, 2-nonanona, etc. (Fig. 2).
+
+                                                                                                             Hidrófobo
+                                                                                                                              Hidrófilo
+      *
+
+                                                2-undecanona                   2-nonanona
+      *
+   Alcanfor        1,8-cineol
+
+ Figura 2.- Moléculas con potencial insecticida                                                       Figura 3.- Mecanismo de acción del biopesticida
+
+
+
+                                                                                                                                                    HIDRODESTILACIÓN
+                                                MÉTODO EXPERIMENTAL
+                                                                                                                                          Figura 4.- Montaje de      a)       b)
+                 Material biológico infestado                                           Resultados                                        hidrodestilación   con
+                                                                                                                                          aparato Clevenger para
+                                                                                                                                          extracción de aceites
+                                                                      Comparación
+      Alta infestación                                                                                                                    esenciales:
+                                                                        Control VS tratado
+                                                                                                                                          a) más densos que el
+                                                                                                                                          agua
+                                                                                                                                          b) menos densos que el
+                                                                                                                                          agua
+                       Estandarización                                                  Evaluación
+
+
+      Muestras iguales                                                    Mortalidad
+      10 cochinillas/muestra                                              Repelencia
+                                                                          Reducción de infestación
+                                                                                                                                                     FORMULACIÓN
+      Muestra control
+
+                                                                                                                                                                   Jabón potásico
+                   Aplicación tratamiento                                               Incubación
+
+
+       Aceite                                                         Condiciones controladas:
+                                                                                                                                                                   Aceite esencial
+       Jabón                                                             Temperatura
+       Agua                                                              Humedad
+                                                                                                                                                                   Agua
+
+
+                                                                                     REFERENCIAS
+
+Ramdani, C.; El Fakhouri, K.; Sbaghi, M.; Bouharroud, R.; Boulamat, R.; Aasfar, A.; Mesfioui, A.; El Bouhssini, M. Chemical Composition and Insecticidal Potential
+of Six Essental Oils from Morocco against Dactylopius opuntiae (Cockerell) under Field and Laboratory Conditons. Insects 2021, 12, 1007.
+
+
+                                                                                AGRADECIMIENTOS
+Los autores agradecen la financiación recibida a través del programa INGENIA, así como el apoyo brindado durante el desarrollo del proyecto.
+
