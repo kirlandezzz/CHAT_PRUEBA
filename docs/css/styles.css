@@ -141,15 +141,11 @@ a:hover { color: var(--c-amarillo-aceite); }
     isolation: isolate;
 }
 .nav__logo {
-    width: 36px;
-    height: 36px;
+    width: 40px;
+    height: 40px;
     flex-shrink: 0;
-    border-radius: 50%;
-    padding: 3px;
-    background:
-        radial-gradient(circle at 30% 30%, rgba(232,165,60,0.22), transparent 60%),
-        linear-gradient(135deg, rgba(107,154,94,0.18), rgba(255,255,255,0.6));
-    box-shadow: 0 1px 3px rgba(0,0,0,0.05), inset 0 0 0 1px rgba(78,114,65,0.08);
+    object-fit: contain;
+    filter: drop-shadow(0 1px 2px rgba(0,0,0,0.08));
     transition: transform 380ms cubic-bezier(0.34, 1.4, 0.6, 1);
 }
 .nav__brand:hover .nav__logo,
@@ -280,12 +276,10 @@ a:hover { color: var(--c-amarillo-aceite); }
     width: 100%;
 }
 .hero__logo {
-    width: 80px; height: 80px;
+    width: 110px; height: 110px;
     margin-bottom: 1.1rem;
-    filter: drop-shadow(0 6px 18px rgba(0,0,0,0.5));
-    background: rgba(255,255,255,0.97);
-    border-radius: 50%;
-    padding: 5px;
+    object-fit: contain;
+    filter: drop-shadow(0 8px 22px rgba(0,0,0,0.45));
 }
 .hero__title {
     font-family: var(--ff-display);
@@ -862,7 +856,7 @@ a:hover { color: var(--c-amarillo-aceite); }
     align-items: center;
     gap: 0.85rem;
 }
-.footer__brand img { width: 44px; height: 44px; background: #fff; border-radius: 50%; padding: 3px; }
+.footer__brand img { width: 48px; height: 48px; object-fit: contain; filter: drop-shadow(0 2px 6px rgba(0,0,0,0.25)); }
 .footer__brand p {
     margin: 0;
     font-family: var(--ff-display);
@@ -1004,12 +998,12 @@ a:hover { color: var(--c-amarillo-aceite); }
 @media (max-width: 600px) {
     body { font-size: 15px; }
 
-    .nav__logo { width: 32px; height: 32px; }
+    .nav__logo { width: 36px; height: 36px; }
     .nav__name { font-size: 1.05rem; }
     .nav__toggle { width: 40px; height: 40px; }
 
     .hero { min-height: 80vh; }
-    .hero__logo { width: 64px; height: 64px; }
+    .hero__logo { width: 88px; height: 88px; }
     .hero__title { font-size: clamp(1.7rem, 7.5vw, 2.4rem); }
     .hero__lead { font-size: 0.98rem; }
     .hero__chip { font-size: 0.74rem; padding: 0.42rem 0.8rem; }
